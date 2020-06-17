@@ -41,7 +41,7 @@ def main():
     
     args = parser.parse_args()
 
-    df = pd.read_table('data/dialog-rewrite/corpus.txt', sep="\t\t", names=['a','b','current','label'], dtype=str)
+    df = pd.read_table('../data/dialog-rewrite/corpus.txt', sep="\t\t", names=['a','b','current','label'], dtype=str)
     df.dropna(how='any', inplace=True)
     train_length = int(len(df)*0.9)
     
@@ -50,7 +50,7 @@ def main():
     print(valid_df.head())
     if args.mode == 'predict':
         # valid_df['current'] = valid_df['label']
-        valid_df = pd.read_table('data/dialog-rewrite/test.csv', sep=",", names=['a','b','current','label'], dtype=str)
+        valid_df = pd.read_table('../data/dialog-rewrite/test.csv', sep=",", names=['a','b','current','label'], dtype=str)
         print(valid_df.tail())
     valid_df['eval_label'] = valid_df['label'].apply(lambda x: ' '.join(list(x)))
 
@@ -59,18 +59,18 @@ def main():
         valid_df = valid_df.iloc[0:args.limit]
     # train_df['len'] = train_df['content'].apply(lambda x: len(x))
 
-    run_root = Path('experiments/' + args.run_root)
-    tokenizer = BertTokenizer.from_pretrained("rbt3")
+    run_root = Path('../experiments/' + args.run_root)
+    tokenizer = BertTokenizer.from_pretrained("../rbt3")
     valid_set = TaggerRewriterDataset(valid_df, tokenizer, valid=True)
     valid_index = np.array(valid_set.valid_index)
-    np.save('index.npy', valid_index)
+    # np.save('index.npy', valid_index)
     valid_df = valid_df.reset_index().loc[valid_index, :]
     ner_index = np.array(valid_set.label_type) == 1
     valid_loader = DataLoader(valid_set, batch_size=args.batch_size,
                               shuffle=False, num_workers=args.workers,
                               collate_fn=tagger_collate_fn)
 
-    config = BertConfig.from_json_file('rbt3/config.json')
+    config = BertConfig.from_json_file('../rbt3/config.json')
     config.num_labels = 5
     # # config.is_decoder = True
     # decoder = BertModel.from_pretrained("../rbt3", config=config)
@@ -135,7 +135,7 @@ def train(args, model, optimizer, scheduler, tokenizer,ner_index, *,
           n_epochs=None):
     n_epochs = n_epochs or args.n_epochs
 
-    run_root = Path('experiments/' + args.run_root)
+    run_root = Path('../experiments/' + args.run_root)
     model_path = run_root / ('tagger_model-%d.pt' % args.fold)
     best_model_path = run_root / ('best-model-%d.pt' % args.fold)
     if best_model_path.exists():
