@@ -1,7 +1,7 @@
 # 抽取式多轮对话改写
 
 ## 模型结构
-![imgage](://github.com/zhusleep/tagger_rewriter/blob/master/model.jpg)
+![模型结构](https://github.com/zhusleep/tagger_rewriter/blob/master/model.jpg)
 
 ## 运行方式
 ```
