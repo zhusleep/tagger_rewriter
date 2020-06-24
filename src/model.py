@@ -7,10 +7,12 @@ from torch.nn import CrossEntropyLoss, MSELoss
 
 
 class TaggerRewriteModel(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config, bert_path):
         super().__init__()
         self.num_labels = config.num_labels
         self.bert = BertModel(config)
+        self.bert = BertModel.from_pretrained(bert_path)
+
         self.qa_outputs = nn.Linear(config.hidden_size, config.num_labels)
         # self.rewrite_output = nn.Linear(config.hidden_size, 2)
         # self.insert_output = F.sigmoid(nn.Linear(config.hidden_size, 1))

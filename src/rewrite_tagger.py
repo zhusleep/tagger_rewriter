@@ -76,8 +76,8 @@ def main():
     # decoder = BertModel.from_pretrained("../rbt3", config=config)
     # encoder = BertModel.from_pretrained("../rbt3")
     # args.vocab_size = config.vocab_size
-
-    model = TaggerRewriteModel(config)
+    bert_path = '../rbt3'
+    model = TaggerRewriteModel(config, bert_path)
     model.cuda()
 
     if args.mode == 'train':
