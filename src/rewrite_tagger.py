@@ -10,6 +10,8 @@ from apex import amp
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import sys
+sys.path.append('..')
 from src.model import TaggerRewriteModel
 from src.dataset import TaggerRewriterDataset, tagger_collate_fn
 from transformers import BertConfig, BertTokenizer, get_constant_schedule_with_warmup
