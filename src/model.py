@@ -1,7 +1,6 @@
 from torch import nn
 import torch
 from transformers import BertTokenizer, BertModel, BertConfig
-from transformers.utils_encoder_decoder import prepare_encoder_decoder_model_kwargs
 import torch.nn.functional as F
 from torch.nn import CrossEntropyLoss, MSELoss
 

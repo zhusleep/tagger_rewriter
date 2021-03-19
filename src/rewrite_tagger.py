@@ -6,7 +6,6 @@ import torch
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from torch.nn import CrossEntropyLoss
-from apex import amp
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -115,7 +114,7 @@ def main():
             # optimizer, num_warmup_steps=warmup_steps, num_training_steps=t_total
         # )
         scheduler = get_constant_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps)
-        model, optimizer = amp.initialize(model, optimizer, opt_level='O2', verbosity=0)
+        # model, optimizer = amp.initialize(model, optimizer, opt_level='O2', verbosity=0)
 
         train(args, model, optimizer, scheduler, tokenizer,ner_index,
               train_loader=train_loader, valid_df=valid_df, valid_loader=valid_loader,
@@ -173,14 +172,12 @@ def train(args, model, optimizer, scheduler, tokenizer,ner_index, *,
 
             loss = outputs[0]
             if (i + 1) % args.step == 0:
-                with amp.scale_loss(loss, optimizer) as scaled_loss:
-                    scaled_loss.backward()
+                loss.backward()
                 optimizer.step()
                 optimizer.zero_grad()
                 scheduler.step()
             else:
-                with amp.scale_loss(loss, optimizer, delay_unscale=True) as scaled_loss:
-                    scaled_loss.backward()
+                loss.backward()
 
             tq.update(args.batch_size)
             losses.append(loss.item() * args.step)

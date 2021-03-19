@@ -1,0 +1,8 @@
+rouge==1.0.0
+tokenizers==0.9.3
+torch==1.7.1+cu101
+torchaudio==0.7.2
+torchvision==0.8.2+cu101
+tqdm==4.56.0
+transformers==3.5.1
+pandas==1.1.5
