@@ -5,6 +5,7 @@
 
 ## 运行方式
 ```
+pip install -r requirements.txt
 cd src
 python3 rewrite_tagger.py
 ```
@@ -12,11 +13,15 @@ python3 rewrite_tagger.py
 ## 环境
 ```
 预训练语言模型rb3,可以在https://github.com/ymcui/Chinese-BERT-wwm下载。或者修改成你自己的预训练模型
-pytorch
-rouge
-apex
-pandas
-transformers
+rouge==1.0.0
+tokenizers==0.9.3
+torch==1.7.1+cu101
+torchaudio==0.7.2
+torchvision==0.8.2+cu101
+tqdm==4.56.0
+transformers==3.5.1
+pandas==1.1.5
+注意 pytorch 根据自己的cuda版本选择安装。
 ```
 
 ## 结果
