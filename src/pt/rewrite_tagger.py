@@ -11,11 +11,11 @@ import pandas as pd
 import numpy as np
 import sys
 sys.path.append('..')
-from src.model import TaggerRewriteModel
-from src.dataset import TaggerRewriterDataset, tagger_collate_fn
+from model import TaggerRewriteModel
+from dataset import TaggerRewriterDataset, tagger_collate_fn
 from transformers import BertConfig, BertTokenizer, get_constant_schedule_with_warmup
-from src.utils import load_model, get_learning_rate, find_best_answer, save_model, write_event, find_best_answer_for_passage
-from src.evaluate import evaluate
+from utils import load_model, get_learning_rate, find_best_answer, save_model, write_event, find_best_answer_for_passage
+from evaluate import evaluate
 
 
 def main():
@@ -128,7 +128,7 @@ def main():
     elif args.mode == 'predict':
         model_path = run_root / ('tagger_model-%d.pt' % args.fold)
         load_model(model, model_path)
-        valid_metrics = validate(model, valid_loader, valid_df, args, tokenizer, decode_mode='beam_search')
+        valid_metrics = validate(model, valid_loader, valid_df, args, tokenizer, ner_index, decode_mode='beam_search')
 
 
 def train(args, model, optimizer, scheduler, tokenizer,ner_index, *,

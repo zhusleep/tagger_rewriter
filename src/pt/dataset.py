@@ -38,7 +38,7 @@ class TaggerRewriterDataset(Dataset):
         # 去哪里    长城北路公园    在什么地方     长城北路公园在什么地方
         # 确实江西炒粉要用瓦罐汤 特产 没错是我老家的特产 没错江西炒粉是我老家的特产
         # 为什么讨厌张艺兴       我喜欢张艺兴 很可爱啊       我也喜欢他     我也喜欢张艺兴
-        pass
+
         # start,end,insert,start_ner,end_ner
         drop_item = 0
         for i in range(len(self.a)):
