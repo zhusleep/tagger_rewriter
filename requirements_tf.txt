@@ -5,4 +5,4 @@ rouge==1.0.0
 tensorboard==2.2.2
 tensorboard-plugin-wit==1.8.0
 tensorflow-estimator==2.2.0
-tensorflow-gpu==2.4.0
+tensorflow-gpu==2.5.3
