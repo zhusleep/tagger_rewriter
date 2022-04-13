@@ -18,7 +18,7 @@ from config import set_train_args
 from data_utils import TaggerRewriterDataset,tagger_collate_fn
 from decode import validate
 
-
+#超参数设置
 args = set_train_args()
 seed_everything(args.seed)
 #记录tensorboard和日志
