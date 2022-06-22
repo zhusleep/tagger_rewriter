@@ -1,5 +1,5 @@
 bert4keras==0.8.4
-numpy==1.19.1
+numpy==1.22.0
 pandas==1.1.5
 rouge==1.0.0
 tensorboard==2.2.2
