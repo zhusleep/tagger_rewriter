@@ -3,9 +3,7 @@ from torch.nn.utils.rnn import pad_sequence
 import random
 import torch
 
-
 class TaggerRewriterDataset(Dataset):
-
     def __init__(self, df, tokenizer, valid=False):
         self.a = df['a'].values.tolist()
         self.b = df['b'].values.tolist()
@@ -56,7 +54,8 @@ class TaggerRewriterDataset(Dataset):
             new_token_type.extend([1]*len(utterance_token))
 
             # 改写或者作为验证集时不对关键信息进行抽取
-            if self.is_valid or n<0.3 and False:
+            # if self.is_valid or n<0.3 and False:
+            if self.is_valid or n < 0.3:
                 # 改写的负样本
                 if self.is_valid:
                     _label = [None] * 5
@@ -114,7 +113,7 @@ class TaggerRewriterDataset(Dataset):
                 insert_pos = len(self.current[i])-text_end + len(context_new_input)
             else:
                 # 指代
-                # 为什么讨厌张艺兴       我喜欢张艺兴 很可爱啊       我也喜欢他     我也喜欢张艺兴
+                # 为什么讨厌张艺兴       我喜欢张艺兴很可爱啊       我也喜欢他     我也喜欢张艺兴
                 coref_start, coref_end = 0, 0
                 for j in range(len(self.current[i])):
                     if self.current[i][j] == self.label[i][j]:

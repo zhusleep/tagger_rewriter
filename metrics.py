@@ -1,5 +1,4 @@
-from rouge import Rouge 
-
+from rouge import Rouge
 
 def evaluate(pred, label):
     rouge = Rouge()
