@@ -17,7 +17,7 @@ def set_seed(seed=6750):
 
 
 def load_model(model, path):
-    state = torch.load(str(path))
+    state = torch.load(str(path), weights_only=True)
     model.load_state_dict(state['model'])
     print('Loaded model from epoch {epoch}, step {step:,}'.format(**state))
     return state, state['loss']
